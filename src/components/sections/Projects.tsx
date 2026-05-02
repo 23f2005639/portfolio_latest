@@ -11,11 +11,7 @@ function GithubIcon({ className }: { className?: string }) {
 
 function ProjectTile({ repo }: { repo: GithubRepo }) {
   return (
-    <div
-      className={`group relative flex flex-col bg-white border p-5 transition-colors duration-150 hover:bg-[#f8f8f8] min-h-[180px] ${
-        repo.isFeatured ? "border-foreground" : "border-border"
-      }`}
-    >
+    <div className={`project-tile group relative flex flex-col bg-white border p-5 min-h-[180px]${repo.isFeatured ? " featured" : ""}`}>
       {/* Top row */}
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2 min-w-0">
@@ -115,7 +111,6 @@ export async function Projects() {
     <section id="projects" className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
 
-        {/* Header */}
         <div className="mb-12 flex items-center gap-4">
           <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted-foreground">
             [PROJECTS]

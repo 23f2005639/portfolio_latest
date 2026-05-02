@@ -23,7 +23,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-border bg-[#f8f8f8] py-24 md:py-32">
+    <section id="contact" className="bg-[#f8f8f8] py-24 md:py-32 border-t border-border">
       <div className="mx-auto max-w-6xl px-6">
 
         <div className="mb-12 flex items-center gap-4">
@@ -75,12 +75,17 @@ export function Contact() {
             <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               // send_message
             </p>
-            <div className="flex items-center justify-between gap-3 bg-secondary px-3 py-2.5">
-              <span className="font-mono text-xs text-foreground truncate">{profile.email}</span>
+            <div className="flex items-center justify-between gap-3 bg-secondary/60 px-3 py-2.5">
+              <span className="font-mono text-xs text-foreground/80 truncate">{profile.email}</span>
               <button
                 onClick={copyEmail}
                 aria-label="Copy email"
-                className="flex shrink-0 items-center gap-1.5 border border-border bg-white px-3 py-1.5 font-mono text-[11px] text-muted-foreground transition-colors hover:bg-foreground hover:text-white cursor-pointer"
+                className="flex shrink-0 items-center gap-1.5 border px-3 py-1.5 font-mono text-[11px] transition-colors duration-150 cursor-pointer"
+                style={{
+                  borderColor: copied ? "#16a34a" : "#d4d4d4",
+                  color: copied ? "#16a34a" : "#6b6b6b",
+                  backgroundColor: copied ? "#f0fdf4" : "white",
+                }}
               >
                 {copied
                   ? <><Check className="h-3 w-3" /> Copied</>

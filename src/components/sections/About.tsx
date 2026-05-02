@@ -17,7 +17,7 @@ const fadeUp: Variants = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.07, ease: "easeOut" },
+    transition: { duration: 0.5, delay: i * 0.07, ease: [0.25, 0.1, 0.25, 1] as const },
   }),
 };
 
@@ -39,7 +39,7 @@ export function About() {
 
         <div className="grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20 items-start">
 
-          {/* Bio — model-card style */}
+          {/* Bio */}
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             custom={1} variants={fadeUp}
@@ -49,7 +49,7 @@ export function About() {
             </h2>
 
             {/* Model card header */}
-            <div className="mb-4 border border-border bg-secondary px-4 py-2 flex items-center gap-3">
+            <div className="mb-4 px-4 py-2 flex items-center gap-3 border border-border bg-secondary/50">
               <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
                 model_card
               </span>
@@ -66,7 +66,7 @@ export function About() {
               {["AI / ML", "Web Dev", "Open Source", "Agentic Systems"].map((tag) => (
                 <span
                   key={tag}
-                  className="border border-border font-mono text-[11px] px-2.5 py-1 text-muted-foreground bg-secondary"
+                  className="border border-border font-mono text-[11px] px-2.5 py-1 text-muted-foreground"
                 >
                   {tag}
                 </span>
@@ -83,7 +83,7 @@ export function About() {
             >
               // currently_learning
             </motion.p>
-            <div className="flex flex-col divide-y divide-border">
+            <div className="flex flex-col">
               {profile.learning.map((item, i) => {
                 const Icon = iconMap[item.icon as keyof typeof iconMap] ?? Bot;
                 return (
@@ -91,12 +91,14 @@ export function About() {
                     key={item.label}
                     initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
                     custom={i + 2} variants={fadeUp}
-                    className="flex items-start gap-3 py-3.5 transition-colors duration-150 hover:bg-secondary/60 px-2 -mx-2 cursor-default"
+                    className="flex items-start gap-3 py-3.5 px-2 -mx-2 border-b border-border last:border-none transition-colors duration-150 hover:bg-secondary/40 cursor-default"
                   >
-                    <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground/60" />
+                    <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground/50" />
                     <div>
                       <p className="font-mono text-xs font-medium text-foreground">{item.label}</p>
-                      <p className="mt-0.5 font-mono text-[11px] text-muted-foreground leading-relaxed">{item.description}</p>
+                      <p className="mt-0.5 font-mono text-[11px] text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
                     </div>
                   </motion.div>
                 );
