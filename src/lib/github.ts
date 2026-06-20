@@ -1,4 +1,3 @@
-import { Octokit } from "@octokit/rest";
 import { cacheLife, cacheTag } from "next/cache";
 import { projectsConfig } from "@/data/projects-config";
 
@@ -35,22 +34,42 @@ export function getLanguageColor(language: string | null): string {
   return LANGUAGE_COLORS[language] ?? "#8b949e";
 }
 
+interface GitHubApiRepo {
+  name: string;
+  description: string | null;
+  html_url: string;
+  homepage: string | null;
+  language: string | null;
+  stargazers_count: number;
+  topics?: string[];
+  updated_at: string | null;
+  fork: boolean;
+  archived: boolean;
+}
+
 export async function getRepos(): Promise<GithubRepo[]> {
   "use cache";
   cacheLife("hours");
   cacheTag("github-repos");
 
   try {
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN,
-    });
+    // Use the public GitHub REST API — no token required
+    const response = await fetch(
+      "https://api.github.com/users/23f2005639/repos?type=owner&per_page=100&sort=updated",
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+        },
+        next: { revalidate: 3600 },
+      }
+    );
 
-    const { data } = await octokit.repos.listForUser({
-      username: "23f2005639",
-      type: "owner",
-      per_page: 100,
-      sort: "updated",
-    });
+    if (!response.ok) {
+      console.error(`GitHub API error: ${response.status}`);
+      return [];
+    }
+
+    const data: GitHubApiRepo[] = await response.json();
 
     const filtered = data.filter(
       (repo) =>
@@ -79,7 +98,8 @@ export async function getRepos(): Promise<GithubRepo[]> {
       if (!a.isFeatured && b.isFeatured) return 1;
       return b.stargazers_count - a.stargazers_count;
     });
-  } catch {
+  } catch (error) {
+    console.error("Failed to fetch GitHub repos:", error);
     return [];
   }
 }

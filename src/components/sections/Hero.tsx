@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { NeuralCanvas } from "@/components/magic/NeuralCanvas";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -101,6 +101,13 @@ export function Hero() {
                   className="inline-flex items-center gap-1.5 border border-foreground bg-foreground px-4 py-2 font-mono text-xs text-white transition-opacity hover:opacity-80 cursor-pointer"
                 >
                   View projects <ArrowUpRight className="h-3 w-3" />
+                </a>
+                <a
+                  href="/new_resume.pdf"
+                  download="Shreyas_Namdeo_Resume.pdf"
+                  className="inline-flex items-center gap-1.5 border border-foreground px-4 py-2 font-mono text-xs text-foreground transition-colors hover:bg-foreground hover:text-white cursor-pointer"
+                >
+                  Resume <Download className="h-3 w-3" />
                 </a>
                 <a
                   href="#contact"

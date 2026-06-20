@@ -25,12 +25,12 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shreyas Namdeo — Curious builder learning in public",
+  title: "Portfolio",
   description:
     "AI enthusiast exploring Agentic AI, building in public. Student developer interested in Next.js, Python, and LangChain.",
   authors: [{ name: "Shreyas Namdeo" }],
   openGraph: {
-    title: "Shreyas Namdeo — Curious builder learning in public",
+    title: "Portfolio",
     description: "AI enthusiast exploring Agentic AI, building in public.",
     type: "website",
   },
