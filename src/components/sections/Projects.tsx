@@ -1,4 +1,4 @@
-import { getRepos, getLanguageColor, type GithubRepo } from "@/lib/github";
+import { getRepos, type GithubRepo } from "@/lib/github";
 import { ArrowUpRight, Star } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -10,28 +10,36 @@ function GithubIcon({ className }: { className?: string }) {
 }
 
 function ProjectTile({ repo }: { repo: GithubRepo }) {
+  // Vibrant status dot selection
+  const dotColor =
+    repo.language === "Python"
+      ? "bg-emerald-500"
+      : repo.language === "TypeScript" || repo.language === "JavaScript"
+      ? "bg-cyan-500"
+      : repo.language === "C++" || repo.language === "Go"
+      ? "bg-violet-500"
+      : "bg-amber-500";
+
   return (
-    <div className={`project-tile group relative flex flex-col bg-white border p-5 min-h-[180px]${repo.isFeatured ? " featured" : ""}`}>
+    <div className={`project-tile group relative flex flex-col bg-white border-2 border-foreground p-6 min-h-[200px] shadow-xs hover:shadow-md transition-shadow${repo.isFeatured ? " featured" : ""}`}>
       {/* Top row */}
-      <div className="mb-3 flex items-start justify-between gap-2">
+      <div className="mb-4 flex items-start justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2 min-w-0">
           {repo.isFeatured && (
-            <span className="bg-foreground font-mono text-[9px] px-1.5 py-0.5 text-white uppercase tracking-widest">
+            <span className="bg-foreground font-mono text-[10px] font-bold px-2 py-0.5 text-white uppercase tracking-wider">
               featured
             </span>
           )}
           {repo.language && (
-            <span className="flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: getLanguageColor(repo.language) }}
-              />
+            <span className="flex items-center gap-1.5 font-mono text-xs font-semibold text-foreground bg-secondary px-2.5 py-1 border border-foreground/30">
+              {/* Vibrant Colored Dot */}
+              <span className={`h-2.5 w-2.5 rounded-full ${dotColor} animate-pulse`} />
               {repo.language}
             </span>
           )}
           {repo.stargazers_count > 0 && (
-            <span className="flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
-              <Star className="h-2.5 w-2.5" />
+            <span className="flex items-center gap-1 font-mono text-xs font-semibold text-foreground">
+              <Star className="h-3 w-3 fill-foreground/10" />
               {repo.stargazers_count}
             </span>
           )}
@@ -41,9 +49,9 @@ function ProjectTile({ repo }: { repo: GithubRepo }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`View ${repo.name} on GitHub`}
-          className="shrink-0 text-muted-foreground/40 transition-colors duration-150 group-hover:text-foreground"
+          className="shrink-0 text-foreground transition-transform duration-150 group-hover:scale-110"
         >
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-5 w-5" />
         </a>
       </div>
 
@@ -52,23 +60,23 @@ function ProjectTile({ repo }: { repo: GithubRepo }) {
         href={repo.html_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="mb-2 font-mono text-sm font-medium text-foreground break-all leading-snug hover:underline"
+        className="mb-2 font-mono text-base font-bold text-foreground break-all leading-snug hover:underline"
       >
         {repo.name}
       </a>
 
       {/* Description */}
-      <p className="flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3">
-        {repo.description || "No description provided."}
+      <p className="flex-1 font-mono text-sm leading-relaxed text-foreground/90 font-medium line-clamp-3">
+        {repo.description || "Core AI repository."}
       </p>
 
       {/* Topics */}
       {repo.topics.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
+        <div className="mt-4 flex flex-wrap gap-1.5">
           {repo.topics.slice(0, 3).map((topic) => (
             <span
               key={topic}
-              className="font-mono text-[10px] text-muted-foreground/60 border border-border px-1.5 py-0.5"
+              className="font-mono text-xs font-semibold text-foreground border border-foreground/40 bg-secondary/50 px-2 py-0.5"
             >
               {topic}
             </span>
@@ -82,10 +90,10 @@ function ProjectTile({ repo }: { repo: GithubRepo }) {
           href={repo.homepage}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+          className="mt-4 inline-flex items-center gap-1 font-mono text-xs font-bold text-foreground hover:underline transition-colors"
           aria-label="Live demo"
         >
-          live demo <ArrowUpRight className="h-2.5 w-2.5" />
+          live demo <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
       )}
     </div>
@@ -94,10 +102,10 @@ function ProjectTile({ repo }: { repo: GithubRepo }) {
 
 function EmptyState() {
   return (
-    <div className="col-span-full flex flex-col items-center justify-center border border-dashed border-border py-20 text-center">
-      <GithubIcon className="mb-4 h-8 w-8 text-muted-foreground/30" />
-      <p className="font-mono text-sm text-muted-foreground">No public repos found</p>
-      <p className="mt-1 font-mono text-xs text-muted-foreground/50">
+    <div className="col-span-full flex flex-col items-center justify-center border-2 border-dashed border-foreground py-20 text-center">
+      <GithubIcon className="mb-4 h-10 w-10 text-foreground" />
+      <p className="font-mono text-base font-bold text-foreground">No public repos found</p>
+      <p className="mt-1 font-mono text-xs font-medium text-foreground">
         Projects appear here once pushed to GitHub.
       </p>
     </div>
@@ -108,15 +116,23 @@ export async function Projects() {
   const repos = await getRepos();
 
   return (
-    <section id="projects" className="bg-white py-24 md:py-32">
+    <section id="projects" className="bg-white py-24 md:py-32 border-t-2 border-border">
       <div className="mx-auto max-w-6xl px-6">
 
         <div className="mb-12 flex items-center gap-4">
-          <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted-foreground">
+          <span className="font-mono text-sm font-bold tracking-[0.2em] uppercase text-foreground">
             [PROJECTS]
           </span>
-          <div className="flex-1 border-t border-border" />
-          <span className="font-mono text-xs text-muted-foreground/50">
+
+          {/* VIBRANT COLORED DOTS IN PROJECTS SECTION HEADER */}
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="h-3 w-3 rounded-full bg-cyan-500 animate-pulse" />
+            <span className="h-3 w-3 rounded-full bg-amber-500 animate-pulse" />
+          </div>
+
+          <div className="flex-1 border-t-2 border-foreground/30" />
+          <span className="font-mono text-xs font-bold text-foreground">
             {repos.length} repos
           </span>
         </div>
@@ -124,7 +140,7 @@ export async function Projects() {
         {repos.length === 0 ? (
           <div className="grid"><EmptyState /></div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {repos.map((repo) => (
               <ProjectTile key={repo.name} repo={repo} />
             ))}
