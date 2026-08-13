@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { ArrowUpRight, Download } from "lucide-react";
@@ -16,143 +15,145 @@ function GithubIcon({ className }: { className?: string }) {
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
 const a = (delay: number) => ({
-  initial: { opacity: 0, y: 18 },
+  initial: { opacity: 0, y: 16 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.65, delay, ease },
+  transition: { duration: 0.6, delay, ease },
 });
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen bg-white flex flex-col overflow-hidden">
-      {/* Neural network canvas */}
+    <section className="relative min-h-[90vh] bg-white flex flex-col justify-center overflow-hidden">
+      {/* Subtle monochrome neural canvas */}
       <NeuralCanvas />
 
-      {/* Scan line sweep */}
+      {/* Subtle scan line */}
       <div className="scan-line" />
 
       {/* Fade bottom into white */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
-      <div className="h-16 shrink-0" />
+      <div className="h-20 shrink-0" />
 
-      <div className="relative z-10 flex flex-1 items-start pt-12 md:items-center md:pt-0">
-        <div className="mx-auto w-full max-w-6xl px-6 py-10 md:py-20">
-
-          {/* Mobile photo */}
-          <motion.div {...a(0.1)} className="mb-10 flex justify-center md:hidden">
-            <div className="relative h-40 w-40 overflow-hidden rounded-full border border-border">
-              <Image
-                src="/man.jpg"
-                alt="Shreyas Namdeo"
-                fill
-                className="object-cover object-top"
-                priority
-                sizes="160px"
-              />
-            </div>
-          </motion.div>
-
-          <div className="flex flex-col gap-16 md:flex-row md:items-center md:justify-between md:gap-16">
-
-            {/* Text */}
-            <div className="flex-1 max-w-xl">
-
-              {/* Terminal prompt */}
-              <motion.div {...a(0.05)} className="mb-5 inline-flex items-center gap-2">
-                <span className="font-mono text-xs text-muted-foreground">
-                  <span className="font-medium text-foreground">$</span>
-                  {" "}whoami
-                  <span
-                    className="ml-1 inline-block h-3.5 w-[1px] align-middle bg-foreground"
-                    style={{ animation: "blink 1s step-end infinite" }}
-                  />
-                </span>
+      <div className="relative z-10 flex flex-1 items-center">
+        <div className="mx-auto w-full max-w-6xl px-6 py-12 md:py-24">
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+            
+            {/* Left Column — Title, tagline, tags & actions */}
+            <div className="max-w-2xl">
+              <motion.div {...a(0.05)} className="mb-6 inline-flex items-center gap-2 border-2 border-foreground bg-white px-3.5 py-1.5 font-mono text-sm font-semibold text-foreground">
+                <span className="font-bold text-foreground">$</span> whoami
+                <span
+                  className="inline-block h-4 w-[2px] align-middle bg-foreground"
+                  style={{ animation: "blink 1s step-end infinite" }}
+                />
               </motion.div>
 
               <motion.h1
                 {...a(0.15)}
-                className="mb-5 font-heading font-light leading-[0.93] tracking-tight text-foreground"
-                style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}
+                className="mb-6 font-heading font-light leading-[0.92] tracking-tight text-foreground"
+                style={{ fontSize: "clamp(4rem, 8.5vw, 7rem)" }}
               >
-                {profile.name.split(" ").map((word, i) => (
-                  <span key={i} className="block">{word}</span>
-                ))}
+                {profile.name}
               </motion.h1>
 
-              <motion.p {...a(0.28)} className="mb-8 font-mono text-sm text-muted-foreground leading-relaxed max-w-sm">
-                {profile.tagline}
+              <motion.p {...a(0.28)} className="mb-8 font-mono text-base font-normal text-foreground leading-relaxed max-w-xl">
+                {profile.tagline}. Architecting deep learning models, neural pipelines with PyTorch, and agentic AI systems using LangChain.
               </motion.p>
 
               {/* Tags */}
-              <motion.div {...a(0.38)} className="mb-8 flex flex-wrap gap-2">
-                {["Agentic AI", "LangChain", "Python", "Open Source"].map((tag) => (
+              <motion.div {...a(0.38)} className="mb-10 flex flex-wrap gap-2.5">
+                {["Core AI/ML", "PyTorch", "LangChain", "Deep Learning", "Open Source"].map((tag) => (
                   <span
                     key={tag}
-                    className="font-mono text-[11px] px-2.5 py-1 border border-border text-muted-foreground"
+                    className="font-mono text-xs font-medium px-3.5 py-1.5 border border-foreground text-foreground bg-white"
                   >
                     {tag}
                   </span>
                 ))}
               </motion.div>
 
-              <motion.div {...a(0.48)} className="flex flex-wrap items-center gap-5">
+              {/* CTAs */}
+              <motion.div {...a(0.48)} className="flex flex-wrap items-center gap-4">
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-1.5 border border-foreground bg-foreground px-4 py-2 font-mono text-xs text-white transition-opacity hover:opacity-80 cursor-pointer"
+                  className="inline-flex items-center gap-2 border-2 border-foreground bg-foreground px-6 py-3 font-mono text-sm font-bold text-white transition-opacity hover:opacity-90 cursor-pointer shadow-xs"
                 >
-                  View projects <ArrowUpRight className="h-3 w-3" />
+                  View projects <ArrowUpRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="/new_resume.pdf"
+                  href="/shreyas_namdeo_resume.pdf"
                   download="Shreyas_Namdeo_Resume.pdf"
-                  className="inline-flex items-center gap-1.5 border border-foreground px-4 py-2 font-mono text-xs text-foreground transition-colors hover:bg-foreground hover:text-white cursor-pointer"
+                  className="inline-flex items-center gap-2 border-2 border-foreground bg-white px-6 py-3 font-mono text-sm font-bold text-foreground transition-colors hover:bg-foreground hover:text-white cursor-pointer"
                 >
-                  Resume <Download className="h-3 w-3" />
+                  Resume <Download className="h-4 w-4" />
                 </a>
                 <a
                   href="#contact"
-                  className="link-underline font-mono text-xs text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+                  className="link-underline font-mono text-sm font-semibold text-foreground transition-colors hover:text-foreground/70 cursor-pointer px-2 py-2"
                 >
                   Get in touch
                 </a>
               </motion.div>
 
+              {/* Socials & Email */}
               <motion.div
                 {...a(0.58)}
-                className="mt-8 flex items-center gap-5 border-t border-border pt-6"
+                className="mt-12 flex items-center gap-6 border-t border-border pt-6"
               >
                 <a href={profile.github} target="_blank" rel="noopener noreferrer"
                   aria-label="GitHub"
-                  className="text-muted-foreground transition-colors hover:text-foreground cursor-pointer">
-                  <GithubIcon className="h-4 w-4" />
+                  className="text-foreground transition-transform hover:scale-110 cursor-pointer">
+                  <GithubIcon className="h-5 w-5" />
                 </a>
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="text-muted-foreground transition-colors hover:text-foreground cursor-pointer">
-                  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  className="text-foreground transition-transform hover:scale-110 cursor-pointer">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                   </svg>
                 </a>
-                <span className="font-mono text-xs text-muted-foreground/60">{profile.email}</span>
+                <span className="font-mono text-sm font-semibold text-foreground">{profile.email}</span>
               </motion.div>
             </div>
 
-            {/* Photo — desktop */}
+            {/* Right Column — Developer Spec Card (Stack removed, Frameworks: PyTorch / LangChain) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
-              className="hidden md:block shrink-0"
+              {...a(0.35)}
+              className="border-2 border-foreground bg-white p-6 shadow-md hidden lg:block"
             >
-              <div className="relative h-72 w-72 overflow-hidden rounded-full border border-border lg:h-80 lg:w-80">
-                <Image
-                  src="/man.jpg"
-                  alt="Shreyas Namdeo"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                  sizes="(max-width: 1024px) 288px, 320px"
-                />
+              <div className="flex items-center justify-between border-b-2 border-foreground pb-3 mb-5 font-mono text-sm">
+                <span className="text-foreground font-bold uppercase tracking-wider text-xs">
+                  // SYSTEM_SPEC
+                </span>
+                <span className="h-2.5 w-2.5 bg-emerald-500 rounded-full animate-pulse" />
+              </div>
+              <div className="space-y-4 font-mono text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-foreground/70 font-medium">DEVELOPER</span>
+                  <span className="text-foreground font-bold">{profile.name}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-foreground/70 font-medium">FOCUS</span>
+                  <span className="text-foreground font-bold">Core AI / ML</span>
+                </div>
+                {/* Stack removed per user instruction */}
+                <div className="flex justify-between items-center">
+                  <span className="text-foreground/70 font-medium">FRAMEWORKS</span>
+                  <span className="text-foreground font-bold">PyTorch / LangChain</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-foreground/70 font-medium">STATUS</span>
+                  <span className="text-foreground font-bold">Building in Public</span>
+                </div>
+              </div>
+              <div className="mt-6 border-t-2 border-foreground pt-4 font-mono text-xs">
+                <div className="flex justify-between text-foreground font-semibold mb-2">
+                  <span>SYSTEM_LOAD</span>
+                  <span className="text-emerald-600 font-bold">OPTIMAL</span>
+                </div>
+                <div className="h-2 w-full bg-secondary overflow-hidden border border-foreground">
+                  <div className="h-full bg-foreground w-5/6" />
+                </div>
               </div>
             </motion.div>
 

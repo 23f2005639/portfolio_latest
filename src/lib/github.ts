@@ -29,9 +29,8 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Jupyter: "#DA5B0B",
 };
 
-export function getLanguageColor(language: string | null): string {
-  if (!language) return "#8b949e";
-  return LANGUAGE_COLORS[language] ?? "#8b949e";
+export function getLanguageColor(_language: string | null): string {
+  return "#0a0a0a";
 }
 
 interface GitHubApiRepo {
