@@ -31,10 +31,10 @@ export function About() {
           custom={0} variants={fadeUp}
           className="mb-12 flex items-center gap-4"
         >
-          <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted-foreground">
+          <span className="font-mono text-sm font-bold tracking-[0.2em] uppercase text-foreground">
             [ABOUT]
           </span>
-          <div className="flex-1 border-t border-border" />
+          <div className="flex-1 border-t-2 border-foreground/30" />
         </motion.div>
 
         <div className="grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-20 items-start">
@@ -44,29 +44,29 @@ export function About() {
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             custom={1} variants={fadeUp}
           >
-            <h2 className="mb-6 font-heading text-4xl font-light leading-tight text-foreground sm:text-5xl">
+            <h2 className="mb-6 font-heading text-5xl font-light leading-tight text-foreground sm:text-6xl">
               About me
             </h2>
 
             {/* Model card header */}
-            <div className="mb-4 px-4 py-2 flex items-center gap-3 border border-border bg-secondary/50">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
+            <div className="mb-6 px-4 py-2.5 flex items-center gap-3 border-2 border-foreground bg-secondary">
+              <span className="font-mono text-xs font-bold text-foreground uppercase tracking-wider">
                 model_card
               </span>
-              <span className="font-mono text-[10px] text-muted-foreground">
-                · type: student · domain: agentic-ai
+              <span className="font-mono text-xs font-semibold text-foreground">
+                · domain: core-ai/ml · framework: pytorch / langchain
               </span>
             </div>
 
-            <p className="text-[0.95rem] leading-[1.9] text-muted-foreground font-light border-l-2 border-foreground pl-4">
+            <p className="text-base leading-relaxed text-foreground font-medium border-l-4 border-foreground pl-4">
               {profile.bio}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["AI / ML", "Web Dev", "Open Source", "Agentic Systems"].map((tag) => (
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {["Core AI / ML", "PyTorch", "LangChain", "Deep Learning", "Open Source"].map((tag) => (
                 <span
                   key={tag}
-                  className="border border-border font-mono text-[11px] px-2.5 py-1 text-muted-foreground"
+                  className="border border-foreground bg-white font-mono text-xs font-semibold px-3 py-1.5 text-foreground"
                 >
                   {tag}
                 </span>
@@ -79,11 +79,11 @@ export function About() {
             <motion.p
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
               custom={1} variants={fadeUp}
-              className="mb-5 font-mono text-[10px] tracking-[0.25em] uppercase text-muted-foreground"
+              className="mb-6 font-mono text-xs font-bold tracking-[0.2em] uppercase text-foreground"
             >
-              // currently_learning
+              // CURRENTLY_EXPLORING
             </motion.p>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               {profile.learning.map((item, i) => {
                 const Icon = iconMap[item.icon as keyof typeof iconMap] ?? Bot;
                 return (
@@ -91,12 +91,12 @@ export function About() {
                     key={item.label}
                     initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
                     custom={i + 2} variants={fadeUp}
-                    className="flex items-start gap-3 py-3.5 px-2 -mx-2 border-b border-border last:border-none transition-colors duration-150 hover:bg-secondary/40 cursor-default"
+                    className="flex items-start gap-4 py-4 px-3 border-2 border-foreground bg-white transition-colors duration-150 hover:bg-secondary cursor-default shadow-xs"
                   >
-                    <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground/50" />
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-foreground" />
                     <div>
-                      <p className="font-mono text-xs font-medium text-foreground">{item.label}</p>
-                      <p className="mt-0.5 font-mono text-[11px] text-muted-foreground leading-relaxed">
+                      <p className="font-mono text-sm font-bold text-foreground">{item.label}</p>
+                      <p className="mt-1 font-mono text-xs font-medium text-foreground leading-relaxed">
                         {item.description}
                       </p>
                     </div>

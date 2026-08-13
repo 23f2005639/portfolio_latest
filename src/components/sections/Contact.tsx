@@ -23,14 +23,14 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-[#f8f8f8] py-24 md:py-32 border-t border-border">
+    <section id="contact" className="bg-secondary/40 py-24 md:py-32 border-t-2 border-border">
       <div className="mx-auto max-w-6xl px-6">
 
         <div className="mb-12 flex items-center gap-4">
-          <span className="font-mono text-xs tracking-[0.25em] uppercase text-muted-foreground">
+          <span className="font-mono text-sm font-bold tracking-[0.2em] uppercase text-foreground">
             [CONTACT]
           </span>
-          <div className="flex-1 border-t border-border" />
+          <div className="flex-1 border-t-2 border-foreground/30" />
         </div>
 
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr] md:gap-20 items-start">
@@ -41,24 +41,24 @@ export function Contact() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <h2 className="font-heading text-4xl font-light leading-tight text-foreground sm:text-5xl mb-5">
+            <h2 className="font-heading text-5xl font-light leading-tight text-foreground sm:text-6xl mb-6">
               Let&apos;s connect
             </h2>
-            <p className="font-mono text-sm leading-relaxed text-muted-foreground mb-8">
-              Whether you want to talk AI, swap ideas, or just say hi — my inbox is always open.
+            <p className="font-mono text-base font-medium leading-relaxed text-foreground mb-8">
+              Whether you want to discuss Core AI/ML research, collaborate on PyTorch & LangChain agentic systems, or swap ideas — my inbox is open.
             </p>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-6">
               <a href={`mailto:${profile.email}`} aria-label="Email"
-                className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                <Mail className="h-4 w-4" />
+                className="text-foreground transition-transform hover:scale-110 cursor-pointer">
+                <Mail className="h-6 w-6" />
               </a>
               <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                <GithubIcon className="h-4 w-4" />
+                className="text-foreground transition-transform hover:scale-110 cursor-pointer">
+                <GithubIcon className="h-6 w-6" />
               </a>
               <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-                className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                className="text-foreground transition-transform hover:scale-110 cursor-pointer">
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
               </a>
@@ -70,26 +70,21 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-            className="border border-border bg-white p-5"
+            className="border-2 border-foreground bg-white p-6 shadow-md"
           >
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              // send_message
+            <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+              // SEND_DIRECT_MESSAGE
             </p>
-            <div className="flex items-center justify-between gap-3 bg-secondary/60 px-3 py-2.5">
-              <span className="font-mono text-xs text-foreground/80 truncate">{profile.email}</span>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-secondary/80 p-3.5 border-2 border-foreground/30">
+              <span className="font-mono text-sm font-bold text-foreground truncate">{profile.email}</span>
               <button
                 onClick={copyEmail}
                 aria-label="Copy email"
-                className="flex shrink-0 items-center gap-1.5 border px-3 py-1.5 font-mono text-[11px] transition-colors duration-150 cursor-pointer"
-                style={{
-                  borderColor: copied ? "#16a34a" : "#d4d4d4",
-                  color: copied ? "#16a34a" : "#6b6b6b",
-                  backgroundColor: copied ? "#f0fdf4" : "white",
-                }}
+                className="flex shrink-0 items-center justify-center gap-2 border-2 border-foreground bg-white px-4 py-2 font-mono text-xs font-bold text-foreground transition-colors hover:bg-foreground hover:text-white cursor-pointer"
               >
                 {copied
-                  ? <><Check className="h-3 w-3" /> Copied</>
-                  : <><Copy className="h-3 w-3" /> Copy</>
+                  ? <><Check className="h-4 w-4" /> Copied</>
+                  : <><Copy className="h-4 w-4" /> Copy Email</>
                 }
               </button>
             </div>
