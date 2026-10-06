@@ -1,11 +1,18 @@
 {
-  "name": "shreyas-namdeo-portfolio",
+  "name": "portfolio_new",
   "version": "1.0.0",
-  "description": "Portfolio website for Shreyas Namdeo - AI/ML Engineer with selective Glyph ASCII rendering engine integration.",
+  "description": "Portfolio website for Shreyas Namdeo - AI/ML Engineer",
   "type": "module",
+  "bin": {
+    "next": "./bin/next.cjs"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node -e \"const fs=require('fs'); fs.rmSync('.next',{recursive:true,force:true}); fs.cpSync('dist','.next',{recursive:true});\"",
+    "next": "node ./bin/next.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
