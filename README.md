@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shreyas Namdeo — AI & ML Engineer Portfolio
 
-## Getting Started
+Personal engineering portfolio showcasing projects, research, and technical leadership in machine learning, on-device perception, and agent systems.
 
-First, run the development server:
+## ✨ Highlights
+- **Interactive 3D ASCII Cyber Mascot**: Rendered dynamically using Three.js and `AsciiEffect` with real-time cursor tracking, smooth inertia, and pitch/yaw safety clamping.
+- **Dark & Light Mode**: Complete theme system with persistence, high-contrast dark palette, and CSS View Transitions radial ripple animation.
+- **Ascii Matrix Decoding Effect**: Terminal decoding animation on hero text mount.
+- **Featured Systems**:
+  - **GUPTCHARA**: Multi-agent stealth surveillance framework with encrypted channel exfiltration.
+  - **AI Code Review System**: Multi-agent GitHub PR auditor with AST span analysis and confidence gating.
+  - **Multi-Agent Container Security System**: Real-time syscall defense and automated attack mitigation.
+  - **Spatio-Temporal Forecasting**: Deep neural network predicting municipal enforcement demand across 7,814 zones.
 
+## 🛠️ Tech Stack
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS v4
+- **3D & ASCII**: Three.js (`three/addons/effects/AsciiEffect.js`)
+- **Icons**: Lucide React
+- **Hosting**: Vercel / GitHub Pages
+
+## 🚀 Getting Started
+
+### Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run Locally
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📬 Contact
+- **Email**: [namdeoshreyaslink@gmail.com](mailto:namdeoshreyaslink@gmail.com)
+- **LinkedIn**: [linkedin.com/in/shreyas-namdeo-2119b0290](https://www.linkedin.com/in/shreyas-namdeo-2119b0290/)
+- **GitHub**: [github.com/23f2005639](https://github.com/23f2005639)
