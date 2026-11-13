@@ -21,3 +21,8 @@ Convert `out/*.png` to `assets/*.jpg` (the page loads the JPGs).
 
 ## Deploy
 Plain static files; `vercel.json` skips install/build and serves the repo root.
+
+## Credits
+- Textures: [Plaster003](https://ambientcg.com/view?id=Plaster003) and [Concrete034](https://ambientcg.com/view?id=Concrete034) by ambientCG, CC0
+- Fonts: Space Grotesk and IBM Plex Mono via Google Fonts
+- Reliefs rendered with Blender 5.3 (Cycles)
