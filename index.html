@@ -1,19 +1,461 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shreyas Namdeo · AI & Machine Learning Engineer</title>
-    <meta name="description" content="Portfolio of Shreyas Namdeo — AI/ML Engineer specializing in Agentic Systems, LangGraph, RAG pipelines, and container security automation." />
-    <meta name="keywords" content="Shreyas Namdeo, AI Engineer, Machine Learning, LangGraph, AI Agents, RAG, PyTorch, Multi-Agent Systems" />
-    <meta name="author" content="Shreyas Namdeo" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  </head>
-  <body class="bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white antialiased min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shreyas Namdeo · AI/ML Engineer</title>
+<meta name="description" content="Portfolio of Shreyas Namdeo, AI/ML engineer working on on-device vision, browser agents and multi-agent systems.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@property --r { syntax: '<length>'; inherits: true; initial-value: 0px; }
+:root {
+  /* surface sampled from the Blender plaster render */
+  --surface: #c0bfbd;
+  --hi: #e6e5e2;
+  --lo: #8e8d8a;
+  --ink: #161514;
+  --muted: #45433f;
+  --accent: #d9431a;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --emboss: -6px -6px 14px var(--hi), 7px 7px 16px var(--lo);
+  --emboss-sm: -3px -3px 6px var(--hi), 3px 3px 7px var(--lo);
+  --deboss: inset 4px 4px 9px var(--lo), inset -4px -4px 9px var(--hi);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; color: var(--ink); font: 16px/1.6 var(--sans);
+  background: var(--surface) url(assets/bg.jpg) 0 0 / 400px 400px;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px dashed var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- nav ---------- */
+header { padding: 20px 0; }
+header .wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 14px var(--mono); letter-spacing: .04em; }
+.brand img { width: 36px; height: 36px; border-radius: 50%; box-shadow: var(--emboss-sm); }
+nav { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px; border-radius: 14px; box-shadow: var(--deboss); }
+nav a { font: 13px var(--mono); text-decoration: none; padding: 6px 12px; border-radius: 10px; }
+nav a:hover { box-shadow: var(--emboss-sm); }
+
+/* ---------- emboss / deboss primitives ---------- */
+.card { border-radius: 22px; box-shadow: var(--emboss); padding: 28px; }
+.well { border-radius: 14px; box-shadow: var(--deboss); padding: 12px 14px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 14px;
+  font: 600 14px var(--mono); text-decoration: none; box-shadow: var(--emboss-sm); transition: box-shadow .12s, transform .12s;
+  border: 0; background: transparent; color: inherit; cursor: pointer;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { box-shadow: var(--deboss); transform: none; }   /* press = deboss */
+.btn.primary { background: var(--ink); color: var(--surface); box-shadow: 4px 4px 10px var(--lo), -3px -3px 8px var(--hi); }
+.btn.primary:active { box-shadow: inset 3px 3px 8px #000, inset -2px -2px 6px #444; }
+.letterpress { color: transparent; background: var(--surface); -webkit-background-clip: text; background-clip: text;
+  text-shadow: 2px 2px 2px var(--hi), -1px -1px 1px var(--lo); }
+.chip { display: inline-block; font: 12px var(--mono); padding: 5px 11px; border-radius: 999px; box-shadow: var(--emboss-sm); margin: 0 6px 8px 0; }
+.label { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- hero ---------- */
+.hero { display: grid; gap: 40px; padding: 24px 0 72px; }
+.art { position: relative; aspect-ratio: 16 / 9; border-radius: 26px; overflow: hidden; box-shadow: var(--deboss); padding: 10px; }
+.art > div { position: relative; width: 100%; height: 100%; border-radius: 18px; overflow: hidden; cursor: crosshair; }
+.art img, .art canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.art canvas {
+  image-rendering: pixelated; transition: --r .35s ease;
+  -webkit-mask: radial-gradient(circle var(--r) at var(--mx, 50%) var(--my, 50%), transparent 96%, #000 100%);
+          mask: radial-gradient(circle var(--r) at var(--mx, 50%) var(--my, 50%), transparent 96%, #000 100%);
+}
+#lens:hover { --r: 140px; }
+.art .hint { position: absolute; right: 22px; bottom: 18px; font: 11px var(--mono); background: var(--ink); color: var(--surface); padding: 4px 8px; border-radius: 6px; pointer-events: none; }
+.hero h1 { font-size: clamp(30px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -.02em; margin: 10px 0 20px; max-width: 18ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.intro { display: grid; gap: 28px; align-items: start; }
+.intro p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
+.intro strong { color: var(--ink); }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; }
+
+/* ---------- sections ---------- */
+section { padding: 56px 0; }
+.sec-head { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: end; margin-bottom: 36px; }
+.sec-head .num { font: 700 clamp(56px, 9vw, 104px)/0.8 var(--sans); grid-row: span 2; }
+.sec-head h2 { margin: 0; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.01em; }
+.sec-head p { margin: 0; color: var(--muted); }
+.dbar { display: block; width: 100%; height: 12px; image-rendering: pixelated; margin-top: 14px; grid-column: 1 / -1; }
+
+.projects { display: grid; gap: 32px; }
+.project h3 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -.01em; }
+.project .sub { margin: 0 0 18px; color: var(--muted); }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 20px 0; }
+.metrics b { display: block; font: 600 20px var(--mono); }
+.project ul { margin: 0 0 20px; padding-left: 0; list-style: none; color: var(--muted); }
+.project li { padding-left: 22px; position: relative; margin-bottom: 8px; }
+.project li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 8px; height: 8px;
+  background: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0 / 4px 4px; }   /* 2x2 dither dot */
+.p-top { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: start; }
+.p-top > div { flex: 1; min-width: 220px; }
+.tag { font: 600 11px var(--mono); color: var(--accent); letter-spacing: .1em; }
+
+.grid2 { display: grid; gap: 28px; }
+.row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.card h3 { margin: 6px 0 4px; font-size: 21px; }
+.card p { color: var(--muted); margin: 8px 0 0; }
+.status { font: 11px var(--mono); padding: 3px 9px; border-radius: 6px; box-shadow: var(--deboss); }
+
+.stack { display: grid; gap: 24px; }
+.stack .well { padding: 22px 20px 14px; border-radius: 20px; }
+.stack h3 { font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 16px; color: var(--muted); }
+
+footer { padding: 56px 0 72px; }
+footer .card { display: grid; gap: 24px; align-items: center; justify-items: start; }
+footer .seal { width: 140px; height: 140px; border-radius: 50%; padding: 8px; box-shadow: var(--deboss); }
+footer .seal canvas { width: 100%; height: 100%; border-radius: 50%; image-rendering: pixelated; display: block; }
+footer h2 { margin: 0 0 6px; font-size: 30px; }
+.credits { font: 11px var(--mono); color: var(--muted); margin-top: 28px; text-align: center; }
+
+@media (min-width: 860px) {
+  .intro { grid-template-columns: 1.4fr 1fr; }
+  .grid2 { grid-template-columns: 1fr 1fr; }
+  .stack { grid-template-columns: repeat(3, 1fr); }
+  footer .card { grid-template-columns: auto 1fr auto; }
+}
+@media (max-width: 560px) {
+  :root { --emboss: -4px -4px 10px var(--hi), 5px 5px 12px var(--lo); }
+  header { padding: 14px 0 8px; }
+  nav { width: 100%; justify-content: space-between; }
+  nav a { padding: 6px 8px; }
+  .hero { gap: 28px; padding-bottom: 40px; }
+  .art { padding: 6px; border-radius: 18px; }
+  .art > div { border-radius: 13px; }
+  .art .hint { display: none; }
+  .ctas .btn { flex: 1 1 auto; justify-content: center; }
+  section { padding: 36px 0; }
+  .sec-head { grid-template-columns: 1fr; margin-bottom: 24px; }
+  .sec-head .num { grid-row: auto; font-size: 56px; }
+  .card { padding: 22px 18px; border-radius: 18px; }
+  .project h3 { font-size: 22px; }
+  .metrics { grid-template-columns: 1fr; gap: 10px; }
+  .metrics .well { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .metrics b { font-size: 16px; text-align: right; }
+  .p-top .btn { width: 100%; justify-content: center; }
+  footer .card { justify-items: center; text-align: center; }
+  footer .ctas { justify-content: center; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/favicon.png" alt="">SHREYAS.CLOUD</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Work</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#stack">Stack</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <div class="hero">
+    <div class="art">
+      <div id="lens">
+        <img src="assets/hero.jpg" alt="Shreyas Namdeo, carved in plaster: SHREYAS raised, NAMDEO recessed">
+        <canvas id="heroDither" aria-hidden="true"></canvas>
+        <span class="hint">hover → undither</span>
+      </div>
+    </div>
+
+    <div class="intro">
+      <div>
+        <span class="label">AI / ML Engineer · India</span>
+        <h1>Perpetually one git commit away from fixing the <em>loss curve</em>.</h1>
+        <p>Hi, I'm Shreyas. I make machines learn things. Sometimes they actually learn. Sometimes they just confidently hallucinate my hopes and dreams.</p>
+        <p>I'm into <strong>AI, ML, on-device vision, and browser agents</strong>, with an unhealthy curiosity for anything involving <strong>Python, WebGPU, and a GPU</strong>.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#projects">Explore my work ↓</a>
+          <a class="btn" href="shreyas_namdeo_resume.pdf">Resume (PDF)</a>
+          <a class="btn" href="https://www.linkedin.com/in/shreyas-namdeo-2119b0290/">LinkedIn</a>
+          <a class="btn" href="https://github.com/23f2005639">GitHub</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="label">Currently</span>
+        <p>Juggling a B.Sc. in Data Science at <strong>IIT Madras</strong> and an Integrated MCA at <strong>DAVV</strong>, because one degree clearly wasn't enough character development.</p>
+        <p>When I'm not studying, I'm probably building something, breaking something, or convincing myself that "one more experiment" is a reasonable use of my evening.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="projects">
+    <div class="sec-head">
+      <span class="num letterpress" aria-hidden="true">01</span>
+      <h2>Featured projects</h2>
+      <p>On-device visual perception, agentic harnesses, and spatio-temporal neural architectures.</p>
+      <canvas class="dbar" aria-hidden="true"></canvas>
+    </div>
+
+    <div class="projects">
+      <article class="card project">
+        <div class="p-top">
+          <div><span class="tag">SIH26171 / ISRO PS-171</span><h3>GUPTCHARA</h3>
+          <p class="sub">On-device visual privacy agent with WebGPU-accelerated perception and zero-egress redaction.</p></div>
+          <a class="btn" href="https://github.com/23f2005639/LWB-Exv2">Repository ↗</a>
+        </div>
+        <div class="metrics">
+          <div class="well"><span class="label">Inference latency</span><b>&lt; 25 ms</b></div>
+          <div class="well"><span class="label">Memory footprint</span><b>&lt; 40 MB RAM</b></div>
+          <div class="well"><span class="label">Privacy barrier</span><b>Zero egress</b></div>
+        </div>
+        <ul>
+          <li>Built for Smart India Hackathon, eliminating raw screen transmission to cloud VLMs during browser agent execution.</li>
+          <li>Runs ONNX Runtime Web (ort-wasm-simd-threaded) with native WebGPU shaders for real-time on-device face &amp; PII redaction.</li>
+          <li>Fuses DOM interactive nodes with visual bounding boxes via Intersection-over-Union (IoU) to conquer canvas &amp; WebGL blindspots.</li>
+          <li>Engineered DPI-invariant Set-of-Mark (SoM) grounding and autonomous agent routing across Gemini Nano &amp; local Ollama.</li>
+        </ul>
+        <span class="chip">WebGPU</span><span class="chip">ONNX Runtime</span><span class="chip">YOLOv26n</span><span class="chip">OmniParser INT8</span><span class="chip">TypeScript</span><span class="chip">Manifest V3</span>
+      </article>
+
+      <article class="card project">
+        <div class="p-top">
+          <div><span class="tag">AGENT HARNESS</span><h3>AI Code Review System</h3>
+          <p class="sub">Multi-agent GitHub PR auditor with confidence gating and automated deduplication.</p></div>
+          <a class="btn" href="https://github.com/23f2005639">Repository ↗</a>
+        </div>
+        <div class="metrics">
+          <div class="well"><span class="label">Audit cost</span><b>~$0.005 / repo</b></div>
+          <div class="well"><span class="label">Harness stages</span><b>10 components</b></div>
+          <div class="well"><span class="label">Confidence gate</span><b>≥ 70%</b></div>
+        </div>
+        <ul>
+          <li>Multi-agent harness auditing GitHub repositories with three specialist LLM agents: Security, Performance, and Style.</li>
+          <li>10-component harness with a confidence cutoff gate that automatically retries low-confidence findings (&lt; 70%).</li>
+          <li>Validation gate deduplicates overlapping AST spans and escalates critical CVSS vulnerabilities.</li>
+          <li>Average audit cost of ~$0.005 per repository in end-to-end test runs.</li>
+        </ul>
+        <span class="chip">Python</span><span class="chip">LangGraph</span><span class="chip">LLMs</span><span class="chip">Agent Harness</span><span class="chip">AST Analysis</span>
+      </article>
+
+      <article class="card project">
+        <div class="p-top">
+          <div><span class="tag">SECURITY</span><h3>Multi-Agent Container Security System</h3>
+          <p class="sub">Real-time container vulnerability defense and automated attack mitigation.</p></div>
+          <a class="btn" href="https://github.com/23f2005639">Repository ↗</a>
+        </div>
+        <div class="metrics">
+          <div class="well"><span class="label">Simulated vectors</span><b>5 techniques</b></div>
+          <div class="well"><span class="label">Sandboxed nodes</span><b>3 containers</b></div>
+          <div class="well"><span class="label">Defense agents</span><b>4 LLMs</b></div>
+        </div>
+        <ul>
+          <li>Simulates 5 real attack techniques: Docker socket escape, namespace escape, Redis lateral movement, auth bypass, and CVE simulation.</li>
+          <li>Isolated execution across 3 sandboxed vulnerable containers with real-time syscall interception.</li>
+          <li>Coordinates 4 specialized AI agents scanning, monitoring, and mitigating threats in real time.</li>
+        </ul>
+        <span class="chip">Python</span><span class="chip">Multi-Agent Systems</span><span class="chip">Docker</span><span class="chip">Sandboxing</span><span class="chip">eBPF Telemetry</span>
+      </article>
+
+      <article class="card project">
+        <div class="p-top">
+          <div><span class="tag">SPATIO-TEMPORAL ML</span><h3>Forecasting Illegal Parking Hotspots</h3>
+          <p class="sub">Deep neural network predicting municipal enforcement demand across 7,814 zones.</p></div>
+          <a class="btn" href="https://github.com/23f2005639">Repository ↗</a>
+        </div>
+        <div class="metrics">
+          <div class="well"><span class="label">Grid resolution</span><b>7,814 zones</b></div>
+          <div class="well"><span class="label">Validation RMSE</span><b>2.83</b></div>
+          <div class="well"><span class="label">Validation MAE</span><b>1.59</b></div>
+        </div>
+        <ul>
+          <li>Full-stack platform predicting illegal-parking hotspots across 7,814 Bengaluru grid zones with a custom spatio-temporal PyTorch network.</li>
+          <li>Fuses learned spatial embeddings with cyclic time features, trained under a custom Poisson loss.</li>
+          <li>Dispatch-routing and dynamic-tariff console for enforcement vehicle deployment.</li>
+        </ul>
+        <span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">Poisson Loss</span><span class="chip">Spatial Embeddings</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <span class="num letterpress" aria-hidden="true">02</span>
+      <h2>Experience &amp; leadership</h2>
+      <p>Workshops, student mentorship, and engineering tracks.</p>
+      <canvas class="dbar" aria-hidden="true"></canvas>
+    </div>
+    <article class="card">
+      <div class="row"><span class="label">2025 – 2026</span><span class="status">Concluded</span></div>
+      <h3>AI / ML Lead · GDSC IIPS, DAVV</h3>
+      <p>Led the artificial intelligence and machine learning division, structuring practical curriculum for hands-on student projects and hackathon acceleration.</p>
+      <p>Ran AI/ML workshops and project tracks for club members, guiding applied ML and agentic-AI builds from initial idea to working demos.</p>
+      <p>Mentored student teams on hackathon submissions and helped scope technical system architectures across the club's AI/ML initiatives.</p>
+    </article>
+  </section>
+
+  <section id="education">
+    <div class="sec-head">
+      <span class="num letterpress" aria-hidden="true">03</span>
+      <h2>Education &amp; certifications</h2>
+      <p>Foundations in data science, computer applications, and deep learning.</p>
+      <canvas class="dbar" aria-hidden="true"></canvas>
+    </div>
+    <div class="grid2">
+      <article class="card">
+        <div class="row"><span class="label">IIT Madras</span><span class="label">2023 – 2027</span></div>
+        <h3>B.Sc. in Data Science and Programming</h3>
+        <p>Indian Institute of Technology Madras (Distance Learning)</p>
+        <div class="well" style="margin-top:16px"><span class="label">Cumulative GPA</span><b style="display:block;font:600 20px var(--mono)">8.23 / 10.0</b></div>
+      </article>
+      <article class="card">
+        <div class="row"><span class="label">IIPS, DAVV</span><span class="label">2023 – 2028</span></div>
+        <h3>Integrated Master's in Computer Application</h3>
+        <p>International Institute of Professional Studies, DAVV (5-year program)</p>
+        <div class="well" style="margin-top:16px"><span class="label">Specialization</span><b style="display:block;font:600 16px var(--mono)">Software Systems &amp; Algorithms</b></div>
+      </article>
+      <article class="card" style="grid-column: 1 / -1">
+        <div class="row"><span class="label">NVIDIA · Issued Jan 2026</span></div>
+        <h3>Applications of AI for Anomaly Detection</h3>
+        <p>Certified in unsupervised anomaly identification, autoencoders, and statistical outlier telemetry.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="sec-head">
+      <span class="num letterpress" aria-hidden="true">04</span>
+      <h2>Technical competencies</h2>
+      <p>Core engineering stack, on-device vision, and machine learning infrastructure.</p>
+      <canvas class="dbar" aria-hidden="true"></canvas>
+    </div>
+    <div class="stack">
+      <div class="well"><h3>Languages &amp; frameworks</h3>
+        <span class="chip">Python (Advanced)</span><span class="chip">PyTorch</span><span class="chip">TypeScript / JS</span><span class="chip">WebGPU &amp; Shaders</span><span class="chip">ONNX Runtime Web</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">FastAPI &amp; Flask</span><span class="chip">HF Transformers</span><span class="chip">NumPy &amp; Pandas</span></div>
+      <div class="well"><h3>Agentic AI &amp; vision</h3>
+        <span class="chip">Autonomous Browser Agents</span><span class="chip">YOLOv26 &amp; OmniParser</span><span class="chip">Multi-Agent Harnesses</span><span class="chip">RAG</span><span class="chip">FAISS, Chroma</span><span class="chip">Set-of-Mark Grounding</span><span class="chip">Small Language Models</span><span class="chip">Zero-Egress Redaction</span><span class="chip">Spatio-Temporal Modeling</span></div>
+      <div class="well"><h3>Infra &amp; tools</h3>
+        <span class="chip">Docker &amp; Sandboxing</span><span class="chip">Linux &amp; eBPF</span><span class="chip">Chrome/Firefox MV3</span><span class="chip">Git &amp; GitHub Actions</span><span class="chip">Bash</span><span class="chip">n8n Automation</span><span class="chip">Vercel</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="card">
+      <div class="seal"><canvas id="sealDither" role="img" aria-label="SN monogram seal"></canvas></div>
+      <div>
+        <h2>Let's build something that actually converges.</h2>
+        <p style="color:var(--muted);margin:0">Open to internships, research collaborations, and hackathon teams.</p>
+      </div>
+      <div class="ctas" style="margin:0">
+        <a class="btn primary" href="https://www.linkedin.com/in/shreyas-namdeo-2119b0290/">Say hi ↗</a>
+        <a class="btn" href="https://github.com/23f2005639">GitHub</a>
+      </div>
+    </div>
+    <p class="credits">Reliefs rendered in Blender · Textures: Plaster003 &amp; Concrete034 by ambientCG (CC0) · © 2026 Shreyas Namdeo</p>
+  </div>
+</footer>
+
+
+<script>
+// 8x8 Bayer threshold matrix: interleave bits of (x^y) and y, low coordinate bits → high rank bits
+const BAYER = new Float32Array(64);
+for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) {
+  let v = 0;
+  for (let b = 0; b < 3; b++) v = (v << 2) | ((((x ^ y) >> b) & 1) << 1) | ((y >> b) & 1);
+  BAYER[y * 8 + x] = (v + 0.5) / 64;
+}
+console.assert(new Set(BAYER).size === 64, 'Bayer matrix must be a permutation');
+
+const INK = [22, 21, 20], PAPER = [214, 213, 210];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// RGBA → luminance, tone-mapped so the `white` percentile lands at `key`:
+// flat plaster goes light and only relief shadows go ink. Pass `range` to reuse a previous mapping.
+function toneMap(p, white = 1, key = 1, range) {
+  const n = p.length / 4, lum = new Float32Array(n);
+  let lo = 1, hi = 0;
+  for (let i = 0; i < n; i++) {
+    const l = (0.2126 * p[i * 4] + 0.7152 * p[i * 4 + 1] + 0.0722 * p[i * 4 + 2]) / 255;
+    lum[i] = l; if (l < lo) lo = l; if (l > hi) hi = l;
+  }
+  if (range) [lo, hi] = range;
+  else if (white < 1) hi = Float32Array.from(lum).sort()[Math.floor(white * (n - 1))];
+  const span = hi - lo || 1;
+  for (let i = 0; i < n; i++) lum[i] = (lum[i] - lo) / span * key;
+  lum.range = [lo, hi];
+  return lum;
+}
+function put(out, i, ink) { const c = ink ? INK : PAPER; out[i * 4] = c[0]; out[i * 4 + 1] = c[1]; out[i * 4 + 2] = c[2]; out[i * 4 + 3] = 255; }
+function bayer(lum, w, out, bias = 0) {
+  for (let i = 0; i < lum.length; i++) put(out, i, lum[i] + bias < BAYER[((i / w | 0) & 7) * 8 + (i % w & 7)]);
+}
+
+// Paint `draw` into canvas at (css width / dot) px, then Bayer-dither it.
+function ditherer(canvas, draw, dot = 2, white = 1, key = 1) {
+  let lum, w, h;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  function prepare() {
+    const px = typeof dot === 'function' ? dot() : dot;
+    w = canvas.width = Math.max(1, Math.round(canvas.clientWidth / px));
+    h = canvas.height = Math.max(1, Math.round(canvas.clientHeight / px));
+    draw(ctx, w, h);
+    lum = toneMap(ctx.getImageData(0, 0, w, h).data, white, key);
+  }
+  function paint(bias = 0) {
+    const img = ctx.createImageData(w, h);
+    bayer(lum, w, img.data, bias);
+    ctx.putImageData(img, 0, 0);
+  }
+  // develop-in: threshold sweeps from all ink to normal
+  function reveal() {
+    if (reduce) return paint();
+    const t0 = performance.now();
+    (function f(t) { const k = Math.min(1, (t - t0) / 1100); paint(-1 + k * (2 - k)); if (k < 1) requestAnimationFrame(f); })(t0);
+  }
+  return { prepare, paint, reveal };
+}
+
+function whenLoaded(src) { const i = new Image(); i.src = src; return i.decode().then(() => i); }
+const coverDraw = img => (ctx, w, h) => {
+  const s = Math.max(w / img.width, h / img.height);
+  ctx.drawImage(img, (w - img.width * s) / 2, (h - img.height * s) / 2, img.width * s, img.height * s);
+};
+
+const ds = [];
+function add(d, first = 'paint') { d.prepare(); if (first) d[first](); ds.push(d); return d; }
+
+whenLoaded('assets/hero.jpg').then(img => add(ditherer(document.getElementById('heroDither'), coverDraw(img), () => innerWidth < 600 ? 1 : 2, 0.5, 0.8), 'reveal'));
+whenLoaded('assets/seal.jpg').then(img => add(ditherer(document.getElementById('sealDither'), coverDraw(img), 1, 0.5, 0.8)));
+
+// section bars develop as they scroll into view
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { io.unobserve(e.target); e.target._d.reveal(); }
+}), { threshold: 0.9 });
+document.querySelectorAll('.dbar').forEach(c => {
+  const d = add(ditherer(c, (ctx, w, h) => {
+    const g = ctx.createLinearGradient(0, 0, w, 0);
+    g.addColorStop(0, '#000'); g.addColorStop(1, '#fff');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  }, 3), reduce ? 'paint' : null);
+  if (!reduce) { d.paint(-1); c._d = d; io.observe(c); }
+});
+
+let rt;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => ds.forEach(d => { d.prepare(); d.paint(); }), 150); });
+
+// hero lens follows the pointer and cuts a hole in the dither to show the raw Blender render
+const lens = document.getElementById('lens');
+const moveLens = e => {
+  const r = lens.getBoundingClientRect();
+  lens.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  lens.style.setProperty('--my', (e.clientY - r.top) + 'px');
+};
+lens.addEventListener('pointermove', moveLens);
+lens.addEventListener('pointerdown', moveLens);   // touch: tap to place the lens
+</script>
+</body>
 </html>

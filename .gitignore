@@ -1,37 +1,4 @@
-# Dependencies
-/node_modules/
-.pnp
-.pnp.js
-
-# Production build
-/dist/
-/dist-ssr/
-/.next/
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor & OS
+# downloaded CC0 textures (re-fetch from ambientCG, see README)
+/textures_dl/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.idea/
-.vscode/*
-!.vscode/extensions.json
-
-# Root-only temporary & local scratch files
-/screenshot_*.png
-/glyph/
-/ascii/
 /.vercel

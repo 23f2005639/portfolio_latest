@@ -1,42 +1,23 @@
-# Shreyas Namdeo — AI & ML Engineer Portfolio
+# Shreyas Namdeo · AI/ML Engineer Portfolio
 
-Personal engineering portfolio showcasing projects, research, and technical leadership in machine learning, on-device perception, and agent systems.
+A static, no-build portfolio: **1-bit dithering** layered on **embossed / debossed plaster**.
 
-## ✨ Highlights
-- **Interactive 3D ASCII Cyber Mascot**: Rendered dynamically using Three.js and `AsciiEffect` with real-time cursor tracking, smooth inertia, and pitch/yaw safety clamping.
-- **Dark & Light Mode**: Complete theme system with persistence, high-contrast dark palette, and CSS View Transitions radial ripple animation.
-- **Ascii Matrix Decoding Effect**: Terminal decoding animation on hero text mount.
-- **Featured Systems**:
-  - **GUPTCHARA**: Multi-agent stealth surveillance framework with encrypted channel exfiltration.
-  - **AI Code Review System**: Multi-agent GitHub PR auditor with AST span analysis and confidence gating.
-  - **Multi-Agent Container Security System**: Real-time syscall defense and automated attack mitigation.
-  - **Spatio-Temporal Forecasting**: Deep neural network predicting municipal enforcement demand across 7,814 zones.
+- Hero, page background and seal are reliefs rendered in **Blender (Cycles)** with CC0 textures from [ambientCG](https://ambientcg.com) (Plaster003, Concrete034).
+- The browser Bayer-dithers the renders live; hovering (or tapping) the hero opens a lens onto the raw render.
+- Cards, chips and buttons are raised; metric wells and the nav are pressed in; buttons deboss when clicked. All shadows share the renders' top-left light.
 
-## 🛠️ Tech Stack
-- **Framework**: React 19 + TypeScript + Vite
-- **Styling**: Tailwind CSS v4
-- **3D & ASCII**: Three.js (`three/addons/effects/AsciiEffect.js`)
-- **Icons**: Lucide React
-- **Hosting**: Vercel / GitHub Pages
-
-## 🚀 Getting Started
-
-### Install Dependencies
+## Run locally
 ```bash
-npm install
+python3 -m http.server 8766   # then open http://localhost:8766
 ```
 
-### Run Locally
+## Re-render the reliefs
+Download the textures (1K-JPG zips) into `textures_dl/<Name>/`, then:
 ```bash
-npm run dev
+blender -b -P blender/render.py -- textures_dl out            # all: hero bg seal
+blender -b -P blender/render.py -- textures_dl out hero       # just one part
 ```
+Convert `out/*.png` to `assets/*.jpg` (the page loads the JPGs).
 
-### Production Build
-```bash
-npm run build
-```
-
-## 📬 Contact
-- **Email**: [namdeoshreyaslink@gmail.com](mailto:namdeoshreyaslink@gmail.com)
-- **LinkedIn**: [linkedin.com/in/shreyas-namdeo-2119b0290](https://www.linkedin.com/in/shreyas-namdeo-2119b0290/)
-- **GitHub**: [github.com/23f2005639](https://github.com/23f2005639)
+## Deploy
+Plain static files; `vercel.json` skips install/build and serves the repo root.
