@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, type ReactNode } from "react";
 import GlyphPortal from "@/components/ui/glyph-portal";
-import { ArrowDown, ArrowUpRight, FileText, GitHub, HuggingFace, Kaggle, LinkedIn } from "@/components/icons";
+import { ArrowDown, ArrowUpRight, FileText, GitHub, HuggingFace, Kaggle, LinkedIn, Mail } from "@/components/icons";
 
 // WebGL glyphs load after the page: the name shows first, the glyphs fade in a moment later
 const GlyphBackground = lazy(() => import("@/components/ui/backgrounds-glyph"));
@@ -44,7 +44,10 @@ function Clip({ src, poster, label, ratio }: { src: string; poster: string; labe
   );
 }
 
+const EMAIL = "mailto:namdeoshreyaslink@gmail.com"; // the address already printed on the public resume
+
 const links = [
+  { label: "Email", href: EMAIL, Icon: Mail },
   { label: "Resume", href: "/shreyas_namdeo_resume.pdf", Icon: FileText },
   { label: "GitHub", href: "https://github.com/23f2005639", Icon: GitHub },
   { label: "Kaggle", href: "https://www.kaggle.com/maxsn2005", Icon: Kaggle },
@@ -139,6 +142,7 @@ const about = [
   ["Now", "Exploring how reasoning models actually work. Also researching how LLMs can be used for compression, and open world models."],
   ["2023–27", "B.Sc. Data Science, IIT Madras. GPA 8.23."],
   ["2023–28", "Integrated MCA, IIPS DAVV. Yes, two degrees at once."],
+  ["2026–now", "Co-organizer at GDSC IIPS DAVV."],
   ["2025–26", "AI/ML lead at GDSC IIPS DAVV. Ran workshops, helped teams get hackathon builds working."],
   ["Jan 2026", "NVIDIA certificate, AI for anomaly detection."],
 ];
@@ -154,7 +158,10 @@ function FooterContent(): ReactNode {
     <div className="relative mx-auto max-w-5xl px-4 pb-8 pt-20 sm:px-6 sm:pt-28">
       <p className="text-xs uppercase tracking-[0.2em] text-neutral-400">Contact</p>
       <h2 className="mt-4 max-w-[14ch] text-balance text-4xl font-bold leading-[0.95] tracking-tighter sm:text-7xl">
-        Got a model that won't converge? Say hi.
+        Got a model that won't converge?{" "}
+        <a href={EMAIL} className="underline decoration-2 underline-offset-[6px] hover:decoration-4">
+          Say hi.
+        </a>
       </h2>
       <div className="mt-10 text-base">
         <Links name="Footer links" />
