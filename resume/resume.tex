@@ -1,0 +1,92 @@
+% Resume of Shreyas Namdeo. One page, letter.
+% Build: latexmk -pdf -outdir=/tmp/resume resume/resume.tex && cp /tmp/resume/resume.pdf public/shreyas_namdeo_resume.pdf
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\definecolor{navy}{HTML}{1F4E79} % the old resume's accent
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[colorlinks=true, urlcolor=navy, linkcolor=navy]{hyperref}
+\usepackage{microtype}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\titleformat{\section}{\large\bfseries\color{navy}}{}{0pt}{}[\vspace{1pt}{\color{navy}\titlerule[0.7pt]}]
+\titlespacing*{\section}{0pt}{8pt}{5pt}
+\setlist[itemize]{leftmargin=1.1em, itemsep=1.5pt, topsep=2.5pt, parsep=0pt}
+
+\newcommand{\role}[3]{\textbf{#1} \hfill #3\\ \textit{#2}\par}
+\newcommand{\project}[3]{\textbf{#1} \textit{(#2)} \hfill \href{#3}{View Repo}\par}
+
+\begin{document}
+
+{\color{navy}\LARGE\bfseries SHREYAS NAMDEO}\par\vspace{3pt}
+\href{mailto:namdeoshreyaslink@gmail.com}{\color{black}namdeoshreyaslink@gmail.com} \textbar{} +91-9826411080 \textbar{} Indore, MP \textbar{}
+\href{https://www.linkedin.com/in/shreyas-namdeo-2119b0290/}{LinkedIn} \textbar{}
+\href{https://github.com/23f2005639}{GitHub} \textbar{}
+\href{https://www.kaggle.com/maxsn2005}{Kaggle} \textbar{}
+\href{https://huggingface.co/maxsn2200}{Hugging Face} \textbar{}
+\href{https://www.shreyascloud.tech}{shreyascloud.tech}
+
+\section*{Professional Summary}
+Aspiring AI/ML Engineer focused on agentic systems, retrieval-augmented pipelines, and applied machine learning. Experienced in building
+multi-agent LLM systems, spatio-temporal forecasting models, container security automation, and geometry-driven 3D pipelines. Proficient
+in Python, PyTorch, LangChain, and LangGraph, with a strong interest in AI agent infrastructure, RAG systems, and applied deep learning.
+
+\section*{Technical Skills}
+\begin{itemize}
+  \item \textbf{Programming \& Frameworks:} Python, HuggingFace, PyTorch, Flask, FastAPI, scikit-learn, NumPy, Pandas, LangChain, LangGraph
+  \item \textbf{AI/ML:} Reinforcement Learning, RAG Applications, Vector Databases, AI Agents, LLM Fundamentals, Small Language Models, NLP, ML Pipelines
+  \item \textbf{Tools \& Cloud:} Docker, Vercel, n8n, Linux, Git, Shell Scripting, Blender
+\end{itemize}
+
+\section*{Experience}
+\role{Freelance Developer}{Independent client work}{2025 -- Present}
+\begin{itemize}
+  \item Built and integrated \href{https://github.com/23f2005639/planTo3D}{PlanTo3D} into a client's website, where it is in use: a CAD-exported
+  floor-plan PDF goes in and a furnished, walkable 3D house comes out in the browser, with no AI model (vector parsing of walls, doors, windows,
+  rooms, stairs and scale; furniture by room-type rules; Blender build and light bake; three.js walkthrough). Wall detection reaches 0.88--0.94
+  precision and 0.97--0.99 recall on hand-measured CAD drawings, with a draft one-storey build in about 1.5 minutes.
+  \item Built a WhatsApp agent for a real-estate broker and influencer: a buyer shares one of his property reels and the agent replies with that
+  property's details, covering his own listings only.
+\end{itemize}
+
+\section*{Key Projects}
+\project{Spatio-Temporal Forecasting of Illegal Parking Hotspots}{Python, PyTorch, FastAPI, React}{https://github.com/23f2005639/parking_violation_system}
+\begin{itemize}
+  \item Built a full-stack platform that predicts illegal-parking hotspots across 7,814 Bengaluru grid zones using a custom spatio-temporal PyTorch
+  neural network (spatial embeddings fused with cyclic time features, trained with Poisson loss), reaching a validation RMSE of 2.83 and MAE of 1.59,
+  plus a dispatch-routing and dynamic-tariff console for enforcement planning.
+\end{itemize}
+\project{Multi-Agent Container Security System}{Python, Multi-Agent Systems}{https://github.com/23f2005639/Docker_Security_Agent}
+\begin{itemize}
+  \item Built a container security platform simulating 5 real attack techniques (Docker socket escape, namespace escape, Redis lateral movement,
+  auth bypass, CVE simulation) across 3 sandboxed vulnerable containers, with 4 specialized AI agents scanning, monitoring, and reporting on each
+  attack in real time.
+\end{itemize}
+\project{Kaggle LLM Science Quiz Solver}{Python, DeBERTa, RAG}{https://github.com/23f2005639/dlgen_ai_quiz_solver}
+\begin{itemize}
+  \item Built an MCQ science-quiz solver for Kaggle's LLM Science Exam format, combining a fine-tuned DeBERTa-v3-large model with an LLM ensemble
+  and a hybrid FAISS + BM25 retrieval pipeline (RRF fusion, cross-encoder reranking) over a self-scraped Wikipedia corpus; placed in the top 500
+  with a private-leaderboard MAP@3 score of 0.753.
+\end{itemize}
+
+\section*{Education}
+\role{Integrated Master's in Computer Application (5-Year Program)}{International Institute of Professional Studies, DAVV}{2023 -- 2028}
+\vspace{3pt}
+\role{B.Sc. in Data Science and Programming}{Indian Institute of Technology Madras (Distance Learning) $\bullet$ GPA: 8.23}{2023 -- 2027}
+
+\section*{Extracurricular}
+\begin{itemize}
+  \item \textbf{Co-Organizer, GDSC IIPS, DAVV} (2026 -- Present); previously \textbf{AI/ML Lead} (2025 -- 2026), running AI/ML workshops and
+  project tracks and mentoring student teams on hackathon builds.
+\end{itemize}
+
+\section*{Certifications \& Awards}
+\begin{itemize}
+  \item Applications of AI for Anomaly Detection --- NVIDIA, Jan 2026
+\end{itemize}
+
+\end{document}

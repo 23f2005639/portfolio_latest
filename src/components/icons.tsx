@@ -40,3 +40,5 @@ export const Kaggle = (props: Props) => (
 export const HuggingFace = (props: Props) => (
   <Stroke {...props}><circle cx="12" cy="11" r="8" /><path d="M9 9.5v.5M15 9.5v.5M8.8 13c1.4 1.9 5 1.9 6.4 0M3.5 18.5 7 16M20.5 18.5 17 16" /></Stroke>
 );
+
+export const Mail = (props: Props) => <Stroke {...props}><path d="M3 5.5h18v13H3zM3.5 6l8.5 7 8.5-7" /></Stroke>;
