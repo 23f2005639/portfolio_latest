@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, type ReactNode } from "react";
 import GlyphPortal from "@/components/ui/glyph-portal";
-import { ArrowDown, ArrowUpRight, FileText, GitHub, LinkedIn } from "@/components/icons";
+import { ArrowDown, ArrowUpRight, FileText, GitHub, HuggingFace, Kaggle, LinkedIn } from "@/components/icons";
 
 // WebGL glyphs load after the page: the name shows first, the glyphs fade in a moment later
 const GlyphBackground = lazy(() => import("@/components/ui/backgrounds-glyph"));
@@ -47,13 +47,15 @@ function Clip({ src, poster, label, ratio }: { src: string; poster: string; labe
 const links = [
   { label: "Resume", href: "/shreyas_namdeo_resume.pdf", Icon: FileText },
   { label: "GitHub", href: "https://github.com/23f2005639", Icon: GitHub },
+  { label: "Kaggle", href: "https://www.kaggle.com/maxsn2005", Icon: Kaggle },
+  { label: "Hugging Face", href: "https://huggingface.co/maxsn2200", Icon: HuggingFace },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-namdeo-2119b0290/", Icon: LinkedIn },
 ];
 
 // icon + label; on small screens the header shows icons only (label stays for screen readers)
 function Links({ name, iconOnlyOnPhone = false }: { name: string; iconOnlyOnPhone?: boolean }) {
   return (
-    <nav aria-label={name} className="flex items-center gap-4 sm:gap-5">
+    <nav aria-label={name} className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-x-5">
       {links.map(({ label, href, Icon }) => (
         <a key={label} href={href} className="group inline-flex min-h-6 min-w-6 items-center justify-center gap-1.5">
           <Icon className="size-4 shrink-0" />
@@ -102,7 +104,7 @@ const work: Project[] = [
     stat: "~92%",
     caption: "custom YOLO accuracy",
     tags: "Custom YOLO · agent architecture · Smart India Hackathon, ISRO PS-171",
-    clip: { src: "/guptchara.mp4", poster: "/guptchara.jpg", ratio: "960 / 478", label: "GUPTCHARA blacking out a face, card numbers and passwords on a demo profile page before the AI agent reads it" },
+    clip: { src: "/guptchara-color.mp4", poster: "/guptchara-color.jpg", ratio: "960 / 478", label: "GUPTCHARA blacking out a face, card numbers and passwords on a demo profile page before the AI agent reads it" },
   },
   {
     name: "PlanTo3D",
@@ -110,7 +112,7 @@ const work: Project[] = [
     text: "Drop in a floor plan PDF and get a furnished 3D house you can walk through in the browser. No AI model, no LLM, just geometry, rules and Blender.",
     stat: "~1.5 min",
     caption: "PDF to walkable house",
-    clip: { src: "/planto3d.mp4", poster: "/planto3d.jpg", ratio: "960 / 574", label: "PlanTo3D walkthrough of a house built from a sample floor plan" },
+    clip: { src: "/planto3d-color.mp4", poster: "/planto3d-color.jpg", ratio: "960 / 574", label: "PlanTo3D walkthrough of a house built from a sample floor plan" },
     tags: "Python · Blender · three.js · Poppler",
   },
   {
