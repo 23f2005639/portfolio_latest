@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "dev": "npm run figures && vite",
+    "build": "npm run figures && tsc -b && vite build",
+    "preview": "vite preview",
+    "figures": "node figures/container.mjs && node figures/parking.mjs"
   },
   "dependencies": {
     "@animate-ui/react": "^2.4.6",
