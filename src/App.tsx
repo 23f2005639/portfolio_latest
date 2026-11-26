@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useRef, type ReactNode } from "react";
 import GlyphPortal from "@/components/ui/glyph-portal";
 import { ArrowDown, ArrowUpRight, FileText, GitHub, LinkedIn } from "@/components/icons";
 
@@ -6,7 +6,11 @@ import { ArrowDown, ArrowUpRight, FileText, GitHub, LinkedIn } from "@/component
 const GlyphBackground = lazy(() => import("@/components/ui/backgrounds-glyph"));
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// plays only while on screen, fetched the first time it comes near; reduced motion gets poster + controls
+// iOS Safari only has the video-specific fullscreen call
+type IOSVideo = HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+const fullscreen = (video: IOSVideo) => (video.requestFullscreen ? video.requestFullscreen().catch(() => {}) : video.webkitEnterFullscreen?.());
+
+// plays only while on screen, fetched the first time it comes near; reduced motion gets poster + controls; tap for fullscreen
 function Clip({ src, poster, label, ratio }: { src: string; poster: string; label: string; ratio: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -31,8 +35,11 @@ function Clip({ src, poster, label, ratio }: { src: string; poster: string; labe
       playsInline
       preload="none"
       aria-label={label}
+      // with native controls (reduced motion) a click is play/pause, and the controls have their own fullscreen button
+      title={reduceMotion ? undefined : "Tap or click for fullscreen"}
+      onClick={reduceMotion ? undefined : (e) => fullscreen(e.currentTarget)}
       style={{ aspectRatio: ratio }}
-      className="mt-5 w-full max-w-xl border border-black bg-neutral-100 object-cover"
+      className={`mt-3 w-full border border-black bg-neutral-100 object-cover ${reduceMotion ? "" : "cursor-zoom-in"}`}
     />
   );
 }
@@ -58,29 +65,6 @@ function Links({ name, iconOnlyOnPhone = false }: { name: string; iconOnlyOnPhon
 }
 
 const label = "text-xs uppercase tracking-[0.2em] text-neutral-600";
-
-// an anatomy figure page (public/figures), sized to its content; loads when scrolled near
-function Figure({ src, title }: { src: string; title: string }) {
-  const ref = useRef<HTMLIFrameElement>(null);
-  const [height, setHeight] = useState(620);
-  useEffect(() => {
-    const frame = ref.current;
-    if (!frame) return;
-    // measure the inner body: documentElement.scrollHeight never reports less than the frame, so it could not shrink
-    const watch = new ResizeObserver(([entry]) => setHeight(Math.ceil(entry.contentRect.height)));
-    const start = () => {
-      const doc = frame.contentDocument;
-      if (doc?.body && doc.URL !== "about:blank") watch.observe(doc.body);
-    };
-    frame.addEventListener("load", start);
-    if (frame.contentDocument?.readyState === "complete") start();
-    return () => {
-      frame.removeEventListener("load", start);
-      watch.disconnect();
-    };
-  }, []);
-  return <iframe ref={ref} src={src} title={title} loading="lazy" style={{ height }} className="mt-5 block w-full max-w-xl border-0 bg-white" />;
-}
 
 // fade content up as it scrolls into view; reduced motion shows everything at once
 function useReveal() {
@@ -108,7 +92,6 @@ type Project = {
   caption: string;
   tags: string;
   clip?: { src: string; poster: string; label: string; ratio: string };
-  figure?: { src: string; title: string };
 };
 
 const work: Project[] = [
@@ -133,11 +116,11 @@ const work: Project[] = [
   {
     name: "Container Security",
     href: "https://github.com/23f2005639/Docker_Security_Agent",
-    text: "Runs five real container attacks across three sandboxes while four AI agents try to catch and stop them.",
+    text: "Runs five real attacks against three deliberately weak containers, then four AI agents work out what happened and write a report.",
     stat: "5 attacks",
-    caption: "across 3 sandboxes",
+    caption: "on 3 weak containers",
     tags: "Python · Docker · eBPF · multi-agent",
-    figure: { src: "/figures/container.html", title: "Fig 3, Container Sentinel: a striker runs five attacks against the sandbox, then four agents report" },
+    clip: { src: "/container.mp4", poster: "/container.jpg", ratio: "16 / 9", label: "Explainer: an attacker runs five real attacks on a sandbox of containers and the host, then the scanner, monitor and network agents run together and the reporter writes a report" },
   },
   {
     name: "Parking hotspots",
@@ -146,7 +129,7 @@ const work: Project[] = [
     stat: "2.83",
     caption: "validation RMSE",
     tags: "PyTorch · FastAPI · React · Poisson loss",
-    figure: { src: "/figures/parking.html", title: "Fig 4, BPIP: city grid cells rise and fall with the hour, tripling in peak windows" },
+    clip: { src: "/parking.mp4", poster: "/parking.jpg", ratio: "16 / 9", label: "Explainer: each city grid cell gets a learned embedding plus time inputs, a network predicts violations per hour, then a day plays through with peak hours tripling the impact and patrols sent to the top hotspots" },
   },
 ];
 
@@ -237,13 +220,18 @@ export default function App() {
                   </h3>
                   <p className="mt-2 max-w-prose">{p.text}</p>
                   <p className="mt-3 font-mono text-xs text-neutral-600 group-hover/row:text-neutral-400">{p.tags}</p>
-                  {p.clip && <Clip {...p.clip} />}
-                  {p.figure && <Figure {...p.figure} />}
+                  <a href={p.href} className="mt-2 inline-flex items-center gap-1.5 break-all font-mono text-xs underline underline-offset-4 hover:decoration-2">
+                    <GitHub className="size-3.5 shrink-0" />
+                    {p.href.replace("https://", "")}
+                    <ArrowUpRight className="size-3 shrink-0" />
+                  </a>
                 </div>
                 <p className="sm:text-right">
                   <span className="block text-3xl font-bold tracking-tight sm:text-4xl">{p.stat}</span>
                   <span className="mt-1 block text-sm text-neutral-600 group-hover/row:text-neutral-400">{p.caption}</span>
                 </p>
+                {/* clips span the text and number columns so the small labels in them stay readable */}
+                {p.clip && <div className="sm:col-span-2 sm:col-start-2"><Clip {...p.clip} /></div>}
               </li>
             ))}
           </ul>
