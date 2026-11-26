@@ -1,4 +1,4 @@
-# downloaded CC0 textures (re-fetch from ambientCG, see README)
-/textures_dl/
+node_modules/
+dist/
+.vercel
 .DS_Store
-/.vercel

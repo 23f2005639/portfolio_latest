@@ -1,28 +1,11 @@
-# Shreyas Namdeo · AI/ML Engineer Portfolio
+# shreyascloud.tech
 
-A static, no-build portfolio: **1-bit dithering** layered on **embossed / debossed plaster**.
+My portfolio. Black text on white, with an interactive glyph background behind the hero.
 
-- Hero, page background and seal are reliefs rendered in **Blender (Cycles)** with CC0 textures from [ambientCG](https://ambientcg.com) (Plaster003, Concrete034).
-- The browser Bayer-dithers the renders live; hovering (or tapping) the hero opens a lens onto the raw render.
-- Cards, chips and buttons are raised; metric wells and the nav are pressed in; buttons deboss when clicked. All shadows share the renders' top-left light.
+Vite + React + TypeScript + Tailwind v4, set up the shadcn way (`components.json`, components in `src/components/ui`).
 
-## Run locally
 ```bash
-python3 -m http.server 8766   # then open http://localhost:8766
+npm install
+npm run dev      # local
+npm run build    # outputs dist/
 ```
-
-## Re-render the reliefs
-Download the textures (1K-JPG zips) into `textures_dl/<Name>/`, then:
-```bash
-blender -b -P blender/render.py -- textures_dl out            # all: hero bg seal
-blender -b -P blender/render.py -- textures_dl out hero       # just one part
-```
-Convert `out/*.png` to `assets/*.jpg` (the page loads the JPGs).
-
-## Deploy
-Plain static files; `vercel.json` skips install/build and serves the repo root.
-
-## Credits
-- Textures: [Plaster003](https://ambientcg.com/view?id=Plaster003) and [Concrete034](https://ambientcg.com/view?id=Concrete034) by ambientCG, CC0
-- Fonts: Space Grotesk and IBM Plex Mono via Google Fonts
-- Reliefs rendered with Blender 5.3 (Cycles)

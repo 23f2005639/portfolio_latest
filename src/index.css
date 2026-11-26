@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #fff;
+  --color-foreground: #000;
+  /* Arial, so body text matches the portal word (Arial Black) */
+  --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-background text-foreground antialiased; }
+
+/* glyph portal home screen */
+/* tapping a letter still picks it; the extra dropdown only covered the tagline */
+[data-gp-touch-picker] { display: none !important; }
+/* bottom row lines up with the header gutters */
+[data-gp-caption] { inset: auto 16px 20px !important; font-size: 13px !important; }
+@media (min-width: 640px) { [data-gp-caption] { inset: auto 32px 28px !important; } }
+[data-gp-enter] { text-decoration: underline; text-underline-offset: 4px; }
