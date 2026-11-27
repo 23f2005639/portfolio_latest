@@ -1,13 +1,40 @@
 @import "tailwindcss";
 
+/* palettes: four colours each (background, lines, accent, text); the switcher sets data-palette on <html>,
+   a custom palette sets the same four variables inline. Everything else is derived from those four. Paper is the default. */
+:root, [data-palette="paper"] { --p-bg: #efe8dd; --p-rule: #76abae; --p-accent: #ff5722; --p-text: #303841; --p-glow: #303841; color-scheme: light; }
+[data-palette="ocean"] { --p-bg: #1b262c; --p-rule: #0f4c75; --p-accent: #3282b8; --p-text: #bbe1fa; --p-glow: #bbe1fa; color-scheme: dark; }
+[data-palette="dusk"] { --p-bg: #0f3040; --p-rule: #464858; --p-accent: #a56f63; --p-text: #d99b7f; --p-glow: #f0c2a8; color-scheme: dark; }
+:root {
+  --p-muted: color-mix(in oklab, var(--p-text) 68%, var(--p-bg));
+  --p-heading: color-mix(in oklab, var(--p-accent) 80%, var(--p-text)); /* the accent, nudged toward the text so headings read on any ground */
+  --p-footer: color-mix(in oklab, var(--p-bg) 85%, black);
+}
+
+@theme inline {
+  --color-background: var(--p-bg);
+  --color-foreground: var(--p-text);
+  --color-muted: var(--p-muted);
+  --color-rule: var(--p-rule);
+  --color-heading: var(--p-heading);
+}
+
 @theme {
-  --color-background: #fff;
-  --color-foreground: #000;
   /* Arial, so body text matches the portal word (Arial Black) */
   --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /* the resume's serif, for section headings */
+  --font-serif: "Latin Modern", Georgia, serif;
+}
+
+@font-face {
+  font-family: "Latin Modern";
+  src: url("/fonts/lmroman10-bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
 }
 
 html { scroll-behavior: smooth; }
+::selection { background: var(--p-rule); color: #fff; }
 body { @apply bg-background text-foreground antialiased; }
 
 /* glyph portal home screen */

@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shreyas Namdeo</title>
+    <meta name="theme-color" content="#efe8dd" />
+    <script>
+      // applies a saved palette before the first paint; the switcher calls the same function
+      window.applyPalette = function (choice) {
+        var root = document.documentElement, roles = ["--p-bg", "--p-rule", "--p-accent", "--p-text", "--p-glow"];
+        var custom = choice.id === "custom";
+        if (custom && !(Array.isArray(choice.colors) && choice.colors.length === 4 && choice.colors.every(function (c) { return /^#[0-9a-f]{6}$/i.test(c); }))) return;
+        root.dataset.palette = choice.id;
+        roles.forEach(function (k, i) { custom ? root.style.setProperty(k, choice.colors[Math.min(i, 3)]) : root.style.removeProperty(k); });
+      };
+      try { var saved = JSON.parse(localStorage.getItem("palette")); if (saved && saved.id) applyPalette(saved); } catch (e) {}
+    </script>
     <meta name="description" content="Shreyas Namdeo. AI/ML engineer from India. Vision models, AI agents, multi-agent systems." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.shreyascloud.tech/" />
@@ -12,7 +24,7 @@
     <meta property="og:image" content="https://www.shreyascloud.tech/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="SHREYAS in big black letters with drifting glyphs inside them" />
+    <meta property="og:image:alt" content="SHREYAS in orange letters on a warm paper background, with dark glyphs drifting inside them" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><rect width='10' height='10'/><text x='5' y='7.6' font-family='monospace' font-size='8' fill='white' text-anchor='middle'>s</text></svg>" />
   </head>

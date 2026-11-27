@@ -41,4 +41,8 @@ export const HuggingFace = (props: Props) => (
   <Stroke {...props}><circle cx="12" cy="11" r="8" /><path d="M9 9.5v.5M15 9.5v.5M8.8 13c1.4 1.9 5 1.9 6.4 0M3.5 18.5 7 16M20.5 18.5 17 16" /></Stroke>
 );
 
+export const Palette = (props: Props) => (
+  <Stroke {...props}><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2.1-.5-1.3.4-2.4 1.7-2.4H18a3 3 0 0 0 3-3c0-5-4-10.5-9-10.5Z" /><path d="M7.5 11v.5M10 7.5v.5M15 7.5v.5" /></Stroke>
+);
+
 export const Mail = (props: Props) => <Stroke {...props}><path d="M3 5.5h18v13H3zM3.5 6l8.5 7 8.5-7" /></Stroke>;
